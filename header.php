@@ -6,28 +6,37 @@
     <?php wp_head(); ?>
 </head>
 <body>
-    <header>
-    <nav class="navbar navbar-expand-lg">
+    <header>   
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
-              <a class="navbar-brand" href="#"><img src="images/logo.png" alt="Logo" class="d-inline-block align-text-top"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-lg-auto">
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Dr.'s secret</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">what’s in</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">FAQs</a>
-                  </li>
-                  <div class="nav-button"><a href="#" class="btn btn-white">Buy Now</a></div>                  
-                </ul>
-              </div>
+                <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                    <?php
+                        $custom_logo_id = get_theme_mod( 'custom_logo' );
+                        $logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+                        if ( has_custom_logo() ) {
+                            echo '<img src="' . esc_url( $logo[0] ) . '" alt="' . get_bloginfo( 'name' ) . '" class="d-inline-block align-text-top">';
+                        } else {
+                            echo '<h1>' . get_bloginfo('name') . '</h1>';
+                        }
+                    ?>                    
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>        
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <?php
+                        wp_nav_menu(array(
+                        'theme_location' => 'main-menu',
+                        'container' => false,
+                        'menu_class' => '',
+                        'fallback_cb' => '__return_false',
+                        'items_wrap' => '<ul id="%1$s" class="navbar-nav ms-lg-auto %2$s">%3$s</ul>',
+                        'depth' => 10,
+                        'walker' => new bootstrap_5_wp_nav_menu_walker()
+                        ));
+                    ?>
+                </div>
             </div>
-        </nav>
+        </nav>        
     </header>
     <main>

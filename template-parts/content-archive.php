@@ -1,7 +1,7 @@
 <!-- Blog item -->
 <article class="card card-hover-shadow border p-3 mb-4">
   <div class="row">
-    <div class="col-md-4"> 
+    <div class="col-md-5"> 
       <!-- Image --> 
         <?php if( !empty(get_the_post_thumbnail()) ) { ?>
         <?php //the_post_thumbnail('medium');?>
@@ -11,12 +11,12 @@
         <?php } ?>        
 
     </div>
-    <div class="col-md-8"> 
+    <div class="col-md-7"> 
       <!-- Content -->
-      <div class="card-body d-flex flex-column h-100 ps-0 pe-3">
+      <div class="card-body d-flex flex-column h-100 ps-0 pe-0 py-0">
         <div><span class="badge text-bg-dark mb-3"><?php the_category(); ?></span></div>
-        <h5 class="card-title mb-3 mb-md-0"><?php the_title(); ?></h5>
-        <p class="card-text"> <?php  the_excerpt();  ?> </p>
+        <h5 class="card-title mb-2"><?php the_title(); ?></h5>
+        <div class="card-text"> <?php  the_excerpt(); ?></div>
         <!-- Author name and button -->
         <div class="d-sm-flex justify-content-between align-items-center mt-auto">
           <p class="mb-2 heading-color fw-semibold">By <?php the_author(); ?></p>

@@ -254,18 +254,57 @@ function cgayen_custom_menus() {
        <?php endif; ?>
  
        <?php
-       echo '</row>'; // End row
+       echo '</div>'; // End row
        echo '</div>'; // End col-md-12
        ?>
    <?php
    }
  }
+// custom WordPress comment walker End.
 
 
 
+//blog list excerpt length change (default length is 55 words)
+ function new_excerpt_length($length) {
+  return 25;  
+  }  
+  add_filter('excerpt_length', 'new_excerpt_length');
 
 
+/**
+ * Register Sidebar
+ */
+function cgayen_register_sidebars() {
+ 
+  /* Register first sidebar name Primary Sidebar */
+  register_sidebar(
+      array(
+          'name'          => __( 'Primary Sidebar', 'cgcustom' ),
+          'id'            => 'sidebar-1',
+          'description' => __( 'A short description of the sidebar.', 'cgcustom' ),
+          'before_widget' => '<section id="%1$s" class="align-items-center mt-5 widget %2$s">',
+          'after_widget' => '</section>',
+          'before_title' => '<h6 class="widget-title mb-3 d-inline-block">',
+          'after_title' => '</h6>'
+      )
+  );
 
+  /* Register second sidebar name Secondary Sidebar */
+  register_sidebar(
+      array(
+          'name'          => __( 'Secondary Sidebar', 'cgcustom' ),
+          'id'            => 'sidebar-2',
+          'description' => __( 'A short description of the sidebar.', 'cgcustom' ),
+          'before_widget' => '<section id="%1$s" class="align-items-center mt-5 widget %2$s">',
+          'after_widget' => '</section>',
+          'before_title' => '<h6 class="widget-title mb-3 d-inline-block">',
+          'after_title' => '</h6>'
+      )
+  );  
 
+  /* Repeat register_sidebar() code for additional sidebars. */
+}
+add_action( 'widgets_init', 'cgayen_register_sidebars' );
 
+  
 ?>

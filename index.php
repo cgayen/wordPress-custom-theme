@@ -8,19 +8,38 @@ get_header(); ?>
 			<!-- Blog list START -->
 			<div class="col-lg-8">
 				<!-- Title -->
-				<h4 class="mb-4"><?php single_post_title(); ?></h4>              
-            
-                    <?php
-                        if (have_posts() ){
-                            while ( have_posts() ) {
 
-                                the_post();
-                                get_template_part( 'template-parts/content', 'archive' );
+                <?php if ( is_home() && ! is_front_page() && ! empty( single_post_title( '', false ) ) ) : ?>
+                    <header class="page-header">
+                    <h1 class="page-title mb-4"><?php single_post_title(); ?></h1>
+                    </header><!-- .page-header -->
+                <?php endif; ?> 
 
-                            }                
-                        
+
+                <?php
+                    if ( have_posts() ) {
+
+                        // Load posts loop.
+                        while ( have_posts() ) {
+                            the_post();
+                            get_template_part( 'template-parts/content', 'archive' );
                         }
-                    ?>
+
+                        
+                    } else {
+
+                        // If no content, include the "No posts found" template.
+                        get_template_part( 'template-parts/content', 'none' ); 
+
+                    }
+                ?>   
+				        
+             <!-- Pagination START -->			  
+			<div class="mt-6">
+                <?php the_posts_pagination(); ?>
+			</div>
+			<!-- Pagination END -->
+                    
             </div>
             <!-- Blog list END -->
             <!-- Sidebar START -->
@@ -32,13 +51,7 @@ get_header(); ?>
 			</div>
 			<!-- Sidebar END --> 
 
-             <!-- Pagination START -->			  
-			<div class="col-12 mt-6">
-			<?php
-			  	the_posts_pagination(); 
-			  ?>
-			</div>
-			<!-- Pagination END -->
+            
 			 
         </div>   
 

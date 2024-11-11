@@ -6,7 +6,7 @@ The template for displaying all single Page
 get_header(); ?>
  
     <div class="container">      
-    <h2><?php the_title(); ?></h2>
+    <?php the_title('<h1 class="page-title mb-4">', '</h1>'); ?>
         <?php
             if (have_posts() ){
                 while ( have_posts() ) {
